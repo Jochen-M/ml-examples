@@ -4,18 +4,18 @@ import csv
 import numpy as np
 
 
-def load_train_data(train_data_path='data/train.csv', encoding='big5'):
+def load_train_data(train_data_path="data/train.csv", encoding="big5"):
     data = []
     for i in range(18):
         data.append([])
 
     n_row = 0
-    text = open(train_data_path, 'r', encoding=encoding)
-    rows = csv.reader(text, delimiter=',')
+    text = open(train_data_path, "r", encoding=encoding)
+    rows = csv.reader(text, delimiter=",")
     for row in rows:
         if n_row != 0:
             for i in range(3, 27):
-                if row[i] != 'NR':
+                if row[i] != "NR":
                     data[(n_row - 1) % 18].append(float(row[i]))
                 else:
                     data[(n_row - 1) % 18].append(float(0))
@@ -52,18 +52,18 @@ def parse_data_to_x_y(data):
 
 
 def load_test_data(
-        test_data_path='data/x_test.csv',
-        test_label_path='data/y_test.csv',
-        encoding='big5'):
+        test_data_path="data/x_test.csv",
+        test_label_path="data/y_test.csv",
+        encoding="big5"):
     x_test = []
     n_row = 0
-    text = open(test_data_path, 'r', encoding=encoding)
-    rows = csv.reader(text, delimiter=',')
+    text = open(test_data_path, "r", encoding=encoding)
+    rows = csv.reader(text, delimiter=",")
     for row in rows:
         if n_row % 18 == 0:
             x_test.append([])
         for i in range(2, 11):
-            if row[i] != 'NR':
+            if row[i] != "NR":
                 x_test[n_row // 18].append(float(row[i]))
             else:
                 x_test[n_row // 18].append(float(0))
@@ -76,8 +76,8 @@ def load_test_data(
 
     y_test = []
     n_row = 0
-    text = open(test_label_path, 'r', encoding=encoding)
-    rows = csv.reader(text, delimiter=',')
+    text = open(test_label_path, "r", encoding=encoding)
+    rows = csv.reader(text, delimiter=",")
     for row in rows:
         if n_row != 0:
             y_test.append(float(row[1]))
