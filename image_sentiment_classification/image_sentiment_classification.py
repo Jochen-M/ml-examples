@@ -75,7 +75,7 @@ def cnn(x_train, y_train, x_test, y_test):
     return model
 
 
-def plot_saliency_map(model, x_test):
+def plot_feature_map(model, x_test):
     conv2d_1_model = K.function([model.layers[0].input, K.learning_phase()], [model.layers[0].output])
     conv2d_1_output = conv2d_1_model([x_test, 0])[0]
     max_pooling2d_1_model = K.function([model.layers[0].input, K.learning_phase()], [model.layers[2].output])
@@ -92,7 +92,7 @@ def plot_saliency_map(model, x_test):
             plt.imshow(feature_map, cmap='gray')
             plt.axis('off')
 
-        plt.savefig(f"saliency_maps/conv2d_1_output_{i}.png")
+        plt.savefig(f"feature_maps/conv2d_1_output_{i}.png")
 
         for _ in range(64):
             feature_map = max_pooling2d_1_output[i, :, :, _]
@@ -100,7 +100,7 @@ def plot_saliency_map(model, x_test):
             plt.imshow(feature_map, cmap='gray')
             plt.axis('off')
 
-        plt.savefig(f"saliency_maps/max_pooling2d_1_output_{i}.png")
+        plt.savefig(f"feature_maps/max_pooling2d_1_output_{i}.png")
 
         for _ in range(128):
             feature_map = conv2d_2_output[i, :, :, _]
@@ -108,7 +108,7 @@ def plot_saliency_map(model, x_test):
             plt.imshow(feature_map, cmap='gray')
             plt.axis('off')
 
-        plt.savefig(f"saliency_maps/conv2d_2_output_{i}.png")
+        plt.savefig(f"feature_maps/conv2d_2_output_{i}.png")
 
         for _ in range(128):
             feature_map = max_pooling2d_2_output[i, :, :, _]
@@ -116,10 +116,10 @@ def plot_saliency_map(model, x_test):
             plt.imshow(feature_map, cmap='gray')
             plt.axis('off')
 
-        plt.savefig(f"saliency_maps/max_pooling2d_2_output_{i}.png")
+        plt.savefig(f"feature_maps/max_pooling2d_2_output_{i}.png")
 
 
-def visualizing_filters():
+def plot_saliency_map():
     pass
 
 
@@ -128,7 +128,7 @@ def main():
 
     model = cnn(x_train, y_train, x_test, y_test)
 
-    plot_saliency_map(model, x_test[:10])
+    plot_feature_map(model, x_test[:10])
 
 
 if __name__ == "__main__":
