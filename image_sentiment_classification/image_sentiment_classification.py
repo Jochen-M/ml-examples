@@ -36,9 +36,6 @@ def load_data(train_data_path="data/train.csv"):
     x_all = np.array(x_all)
     y_all = np.array(y_all)
 
-    print(x_all.shape)
-    exit()
-
     x_all = x_all.astype("float32") / 255
     x_all = np.reshape(x_all, (x_all.shape[0], img_rows, img_cols, 1))
     y_all = keras.utils.to_categorical(y_all, num_class)
@@ -117,10 +114,6 @@ def plot_feature_map(model, x_test):
             plt.axis('off')
 
         plt.savefig(f"feature_maps/max_pooling2d_2_output_{i}.png")
-
-
-def plot_saliency_map():
-    pass
 
 
 def main():

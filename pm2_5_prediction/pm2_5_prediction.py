@@ -12,7 +12,9 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+
 import utils as U
+
 
 # read data
 x_train, y_train = U.load_train_data()
